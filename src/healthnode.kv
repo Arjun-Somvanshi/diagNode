@@ -1,0 +1,216 @@
+#: import RGBA kivy.utils.rgba
+#: import Window kivy.core.window.Window
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+Screen_Manager:
+    Login:
+    SignUp:
+    ViewRecords:
+<Label>:
+    font_name: app.fonts["regular"]
+    color: app.theme["font2"]
+    size_hint_y: None
+<Button>:
+    background_normal: ''
+    background_down: ''
+    background_color: app.theme["primary"] if self.state == "normal" else app.theme["primary_dark"]
+    color: app.theme["font1"]
+    font_name: app.fonts["regular"]
+    size_hint_y: None
+
+<TextInput>:
+    canvas.after:
+        Color:
+            rgba: (1,0,0,0.5) if self.error else (0,0,0,0)
+        Line:
+            points: [self.x, self.y, self.x, self.top, self.right, self.top, self.right, self.y, self.x, self.y]
+    error: False
+    background_color:  app.theme['secondary']
+    background_normal: ''
+    foreground_color: app.theme['font2']
+    multiline: False
+    padding: dp(10)
+    background_disabled_normal: ''
+    font_name: app.fonts["regular"] 
+    cursor_color: app.theme['font2']
+    hint_text_color: app.theme['font1']
+    size_hint_y: None
+    write_tab: False
+    disabled_foreground_color: self.foreground_color if self.text else self.hint_text_color
+    disabled_background_color: self.background_color if self.text else self.hint_text_color
+
+<Login>:
+    name: 'login'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary"]
+            RoundedRectangle:
+                size: self.width - self.width/8, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(100)
+        Label:
+            font_name: app.fonts["main"]
+            text: "HealthNode"
+            color: app.theme["font1"]
+            font_size: sp(45)
+            halign: 'right'
+            height: self.texture_size[1]
+        Label:
+            id: message
+            size_hint_y: None
+            height: dp(100)
+            color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "L O G I N"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                TextInput:
+                    id: username
+                    hint_text: 'Username'
+                    height: dp(50)
+                TextInput:
+                    id: password 
+                    hint_text: 'Password'
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "SignUp"
+                        height: dp(50)
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        on_release: root.signup()
+                    Button:
+                        text: "Login"
+                        height: dp(50)
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        on_release: root.auth()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            height: dp(50)
+            color: app.theme['font1']
+
+<SignUp>:
+    name: 'signup'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary"]
+            RoundedRectangle:
+                size: self.width, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(100)
+        Label:
+            font_name: app.fonts["main"]
+            text: "HealthNode"
+            color: app.theme["font1"]
+            font_size: sp(45)
+            halign: 'right'
+            height: self.texture_size[1]
+        Label:
+            id: message
+            size_hint_y: None
+            height: dp(100)
+            color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "S I G N   U P"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                TextInput:
+                    id: username
+                    hint_text: 'Username'
+                    text: "arjun"
+                    height: dp(50)
+                TextInput:
+                    id: password
+                    hint_text: 'Password'
+                    text: "arjun2000"
+                    password: True
+                    height: dp(50)
+                TextInput:
+                    id: cpassword
+                    hint_text: 'Confirm Password'
+                    password: True
+                    text: "arjun2000"
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "Back"
+                        height: dp(50)
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        on_release:
+                            app.root.transition = SlideTransition(direction='right')
+                            app.root.current = 'login'
+                    Button:
+                        text: "SignUp"
+                        height: dp(50)
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        on_release: root.signup_and_verify()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            color: app.theme['font1']
+            height: dp(50)
+
+
+<ViewRecords>:
+    name: 'view'
