@@ -1,31 +1,3 @@
-# Module for security protocols of reminiscor
-'''
-Reminiscor is a free offline password manager.
-Copyright (C) 2020 Arjun Somvanshi & Manvendra Somvanshi
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
-'''
-
-'''
-Following is the way to define argon two parameters:
-    * set the number of iteration to 2
-    * choose how many devices you will use the database on, and note the ram of the device which has the least memory, let that be m
-    * the memory parameter should be the least of m/2 and 1
-    * Find out the number of logical processors of each of your devices. Set the parallelism parameter to the minimum of these numbers. On Windows 10, 
-      the number of logical processors can be found in the Task Manager (right-click onto the taskbar → 'Task Manager') on the 'Performance' tab page.
-'''
-
 import hashlib
 from Crypto.Random import get_random_bytes
 import json
