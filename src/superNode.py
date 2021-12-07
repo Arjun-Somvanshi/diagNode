@@ -5,12 +5,20 @@ from kivy.properties import ListProperty, StringProperty, DictProperty, BooleanP
 from kivy.utils import rgba as RGBA
 from kivy.core.window import Window
 from kivy.metrics import dp, sp
+from kivy.utils import platform
 from CustomModalView import CustomModalView
+from Crypto.Hash import SHA256
+from Crypto.Signature import pkcs1_15
+from Crypto.PublicKey import RSA
 from security import *
 import os
 
 app = None
 Window.clearcolor = RGBA('#292B2F')
+
+if platform == 'win':
+    import ctypes
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 class Screen_Manager(ScreenManager):
     pass
@@ -28,6 +36,7 @@ class SignUp(Screen):
                     credentials = credentials.encode("utf-8")
                     os.mkdir("../SuperUserData/")
                     app.write_file("Credentials.bin", credentials)
+                    app.generate_key_pair()
                     self.manager.transition = SlideTransition(direction="right")
                     self.manager.current = "login"
                 else:
@@ -46,6 +55,8 @@ class Login(Screen):
         try:
             stored_hash = app.read_file("Credentials.bin").decode("utf-8")
             if stored_hash == credentials:
+                global app
+                app.credentials = credentials
                 self.manager.transition = SlideTransition(direction="left")
                 self.manager.current = "sendblock"
             else:
@@ -70,7 +81,6 @@ class SendBlock(Screen):
         design = LoadPopupDesign()
         loadPopup = CustomModalView(
                                 size_hint = (0.7, 0.8),
-                                auto_dismiss = False,
                                 size_hint_max = (dp(450),dp(550)),
                                 size_hint_min = (dp(325),dp(400)),
                                 custom_color = app.theme["primary"],
@@ -79,6 +89,9 @@ class SendBlock(Screen):
                            )
         loadPopup.add_widget(design)
         loadPopup.open(loadPopup.pos_hint, {'center_x': 0.5, 'center_y': 0.5}, "out_expo")
+        # read medical record
+        medical_record = app.read_json_file("medical_record.json") 
+
         
 
 
@@ -105,7 +118,7 @@ class superNodeApp(App):
         with open(self.home+file, 'w') as f:
             json.dump(content, f, indent=2)
 
-    def read_json_file(self, file, content):
+    def read_json_file(self, file):
         with open(self.home+file, 'w') as f:
             return json.load(f)
 
@@ -116,6 +129,9 @@ class superNodeApp(App):
             return False
         except:
             return False
+    def generate_key_pair():
+        private_key = RSA.generate(2048)
+        public_key = private_key.publickey()
 
     def on_start(self):
         Window.clearcolor = self.theme["primary"]

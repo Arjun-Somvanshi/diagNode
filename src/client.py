@@ -1,5 +1,6 @@
 import socket
 from threading import Thread
+from blockchain import *
 
 HEADER_SIZE=10
 
@@ -7,8 +8,7 @@ def server_connect(Host,Port,data):
     global client
     client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     client.connect((Host,Port))
-    rthread=Thread(target=connected,args=(data,client,True)).start()
-    rthread.start()
+    Thread(target=connected,args=(data,client)).start()
 
 def connected(data,client):
     try:
@@ -32,4 +32,22 @@ def connected(data,client):
     except Exception as e:
       print("Exception occured in sendMessage: "+str(e))
 
+if __name__ == "__main__":
+    username_hash = blake("Arjun")                
+    password_hash = blake("arjun1922")                
+
+    hospital_admin_username = blake("Raahil")
+    hospital_admin_password = blake("raahil2022")
+
+    credentials = username_hash + password_hash
+    credentialsHospital = hospital_admin_username + hospital_admin_password 
+    
+    signer_private_key = RSA.generate(2048)
+    signer_public_key = signer_private_key.publickey()
+    
+    medical_data = {"sick": "yes I have headache"}
+    blockChain = BlockChain(credentials)
+    blockChain.appendBlock(medical_data, credentials, signer_private_key, credentialsHospital)
+    serializedBlockList = [pickle.dumps(blockChain.chain[1])]
+    server_connect("127.0.0.1", 8000, serializedBlockList)
 

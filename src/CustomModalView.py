@@ -23,7 +23,6 @@ class CustomModalView(ModalView): # here I have made a custom modal view so that
         if animate: # we have to parameters to decide whether animation should occur or
         # not, incase, the user decides to not use animations on slow hardware, app.animations will be set to false, 
         # if the developer doen't wanna use the animation then he/she can set animate to false
-            self.disabled = True
             self.pos_hint = pos_hint_initial
             anim = Animation(pos_hint = pos_hint_final, t = t, duration = d1)
             anim &= Animation(opacity = 1, t=t, duration=d2)
@@ -37,9 +36,8 @@ class CustomModalView(ModalView): # here I have made a custom modal view so that
     def enable_popup(self, *args):
         self.disabled = False
     
-    def dismiss(self, pos_hint_final = {}, t = '', d1=0.7, d2=0.75, animate = True, *largs, **kwargs):
+    def dismiss(self, pos_hint_final = {"center_x": -2, "center_y": 0.5}, t = 'in_expo', d1=0.7, d2=0.75, animate = True, *largs, **kwargs):
         #print('dismissing')
-        self.disabled = True
         if animate:
             anim = Animation(pos_hint = pos_hint_final, t = t, duration = d1)
             anim &= Animation(opacity = 0, t=t, duration = d2)
