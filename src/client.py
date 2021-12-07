@@ -49,5 +49,6 @@ if __name__ == "__main__":
     blockChain = BlockChain(credentials)
     blockChain.appendBlock(medical_data, credentials, signer_private_key, credentialsHospital)
     serializedBlockList = [pickle.dumps(blockChain.chain[1])]
+    print(serializedBlockList)
     server_connect("127.0.0.1", 8000, serializedBlockList)
 

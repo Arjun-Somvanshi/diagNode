@@ -10,7 +10,7 @@ HEADER_SIZE=10
 check=True
 
 listLength = None
-list = []
+List = []
 
 def changeCheck(c):
     global check
@@ -25,31 +25,32 @@ def accept():
 def connected(client):
     try:
         length=client.recv(HEADER_SIZE).decode('UTF-8')
-
         message=client.recv(int(length)).decode('UTF-8')
 
         listLength = int(message[6:])
-
-        for x in listLength:
+        print(listLength)
+        for x in range(listLength):
             length=client.recv(HEADER_SIZE).decode('UTF-8')
             message=client.recv(int(length)).decode('UTF-8')
-            list.append(client.recv(int(message[6:])))
+            print(message)
+            List.append(client.recv(int(message[6:])))
+            print(List)
     except Exception as e:
         print("exception in connected: "+str(e)) 
         client.close()
 
 def clearList():
-    global listLength,list
+    global listLength,List
     listLength = None
-    list = []
+    List = []
 
 def getListLength():
-    global listLength,list
+    global listLength,List
     return listLength
 
 def getList():
-    global list
-    return list
+    global List
+    return List
 
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 def startListening(port):
