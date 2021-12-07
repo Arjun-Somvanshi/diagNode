@@ -5,7 +5,9 @@
 Screen_Manager:
     Login:
     SignUp:
-    ViewRecords:
+    SendBlocks:
+    RecieveBlock:
+
 <Label>:
     font_name: app.fonts["regular"]
     color: app.theme["font2"]
@@ -93,11 +95,13 @@ Screen_Manager:
                 TextInput:
                     id: username
                     hint_text: 'Username'
+                    text: "arjun"
                     height: dp(50)
                 TextInput:
                     id: password 
                     hint_text: 'Password'
                     password: True
+                    text: "arjun2000"
                     height: dp(50)
                 BoxLayout:
                     size_hint_y: None
@@ -215,5 +219,207 @@ Screen_Manager:
             height: dp(50)
 
 
-<ViewRecords>:
-    name: 'view'
+<SendBlocks>:
+    name: 'sendblocks'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary"]
+            RoundedRectangle:
+                size: self.width, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(50)
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            Label:
+                font_name: app.fonts["main"]
+                text: "HealthNode\n[size=20]SuperNode"
+                color: app.theme["font1"]
+                font_size: sp(45)
+                markup: True
+                halign: 'right'
+                height: self.texture_size[1]
+            Widget:
+                size_hint_y: None
+                height: dp(20)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Widget:
+                Button:
+                    text: "Get a Block"
+                    background_color: app.theme["primary"] if self.state == "normal" else app.theme["primary_dark"]
+                    size_hint_y: None
+                    height: dp(40)
+                    on_release:
+                        app.root.transition = SlideTransition(direction='left')
+                        app.root.current = 'recieveblock'
+            Widget:
+                size_hint_y: None
+                height: dp(40)
+            Label:
+                id: message
+                size_hint_y: None
+                height: dp(40)
+                color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "Send Blocks"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                TextInput:
+                    id: ip 
+                    hint_text: 'IP Address'
+                    height: dp(50)
+                TextInput:
+                    id: port
+                    hint_text: 'Port'
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "Back"
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        height: dp(50)
+                        height: dp(50)
+                        on_release:
+                            app.root.transition = SlideTransition(direction='right')
+                            app.root.current = 'login'
+                    Button:
+                        text: "Send"
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        height: dp(50)
+                        on_release: root.send()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            color: app.theme['font1']
+            height: dp(50)
+
+<RecieveBlock>: 
+    name: "recieveblock"
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary"]
+            RoundedRectangle:
+                size: self.width, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(100)
+        Label:
+            font_name: app.fonts["main"]
+            text: "HealthNode\n[size=20]SuperNode"
+            color: app.theme["font1"]
+            font_size: sp(45)
+            markup: True
+            halign: 'right'
+            height: self.texture_size[1]
+        Label:
+            id: message
+            size_hint_y: None
+            height: dp(20)
+            color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "Get Block"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                Label:
+                    id: ip
+                    text: "IP: 127.0.0.1"
+                    color: app.theme["font1"]
+                    height: dp(50)
+                    font_size: dp(18)
+                    
+                TextInput:
+                    id: port
+                    hint_text: 'Port'
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "Back"
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        height: dp(50)
+                        on_release:
+                            app.root.transition = SlideTransition(direction='right')
+                            app.root.current = 'sendblocks'
+                    Button:
+                        text: "Get"
+                        background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                        height: dp(50)
+                        on_release: root.signup_and_verify()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            color: app.theme['font1']
+            height: dp(50)
+
+<LoadPopupDesign>:
+    orientation: "vertical"
+    Label:
+        text: "Hello"
+        size_hint_y: None
+        height: dp(300)

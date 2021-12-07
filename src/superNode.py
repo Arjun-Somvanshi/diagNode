@@ -10,6 +10,7 @@ from CustomModalView import CustomModalView
 from Crypto.Hash import SHA256
 from Crypto.Signature import pkcs1_15
 from Crypto.PublicKey import RSA
+from blockchain import Block
 from security import *
 import os
 
@@ -49,13 +50,13 @@ class SignUp(Screen):
 
 class Login(Screen):
     def auth(self):
+        global app
         username_hash = blake(self.ids.username.text)                
         password_hash = blake(self.ids.password.text)                
         credentials = username_hash + password_hash
         try:
             stored_hash = app.read_file("Credentials.bin").decode("utf-8")
             if stored_hash == credentials:
-                global app
                 app.credentials = credentials
                 self.manager.transition = SlideTransition(direction="left")
                 self.manager.current = "sendblock"
@@ -90,8 +91,17 @@ class SendBlock(Screen):
         loadPopup.add_widget(design)
         loadPopup.open(loadPopup.pos_hint, {'center_x': 0.5, 'center_y': 0.5}, "out_expo")
         # read medical record
-        medical_record = app.read_json_file("medical_record.json") 
-
+        fileName = self.ids.medical_record_path.text
+        medical_record = app.read_json_file(fileName) 
+        private_key = app.fetch_private_key()
+        # create a block for user block chain 
+        block = Block()
+        block.medical_data = medical_record
+        block.signer_hash = app.credentials
+        block.signature = pkcs1_15.new(signerPrivateKey).sign(hashObj)
+        # send it to user 
+        serializedBlockList = [pickle.dumps(block)]
+        server_connect(self.ids.ip.text, self.ids.port.text, serializedBlockList)
         
 
 
@@ -119,7 +129,7 @@ class superNodeApp(App):
             json.dump(content, f, indent=2)
 
     def read_json_file(self, file):
-        with open(self.home+file, 'w') as f:
+        with open(self.home+file, 'r') as f:
             return json.load(f)
 
     def checkUser(self):
@@ -129,12 +139,25 @@ class superNodeApp(App):
             return False
         except:
             return False
-    def generate_key_pair():
+
+    def generate_key_pair(self):
         private_key = RSA.generate(2048)
+        print(private_key)
         public_key = private_key.publickey()
+        print(public_key)
+        private_key = private_key.export_key('PEM')
+        public_key = public_key.export_key('PEM') 
+        self.write_file('privateKey.pem', private_key)
+        self.write_file('publicKey.pem', public_key)
+
+    def fetch_private_key(self):
+        private_key = RSA.import_key(self.read_file('privateKey.pem'))
+        print(private_key)
+        return private_key
 
     def on_start(self):
         Window.clearcolor = self.theme["primary"]
+
     def build(self):
         global app
         app = self

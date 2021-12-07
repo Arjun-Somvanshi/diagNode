@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
+from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ListProperty, StringProperty, DictProperty, BooleanProperty, NumericProperty
 from kivy.utils import rgba as RGBA
 from kivy.core.window import Window
@@ -42,7 +43,8 @@ class Login(Screen):
         try:
             stored_hash = app.read_file("Credentials.bin").decode("utf-8")
             if stored_hash == credentials:
-                self.ids.message.text = "Success"
+                self.manager.transition = SlideTransition(direction="left")
+                self.manager.current = "sendblocks"
             else:
                 self.ids.message.text = "Login Failed"
         except:
@@ -55,7 +57,40 @@ class Login(Screen):
         else:
             self.manager.transition = SlideTransition(direction="left")
             self.manager.current = "signup"
-class ViewRecords(Screen):
+
+class SendBlocks(Screen):
+    def send(self):
+        global app
+        design = LoadPopupDesign()
+        loadPopup = CustomModalView(
+                                size_hint = (0.7, 0.8),
+                                size_hint_max = (dp(450),dp(550)),
+                                size_hint_min = (dp(325),dp(400)),
+                                custom_color = app.theme["primary"],
+                                opacity = 0,
+                                pos_hint = {'center_x': -2, 'center_y':0.5 }
+                           )
+        loadPopup.add_widget(design)
+        loadPopup.open(loadPopup.pos_hint, {'center_x': 0.5, 'center_y': 0.5}, "out_expo")
+        # read medical record
+        fileName = self.ids.medical_record_path.text
+        medical_record = app.read_json_file(fileName) 
+        private_key = app.fetch_private_key()
+        # create a block for user block chain 
+        block = Block()
+        block.medical_data = medical_record
+        block.signer_hash = app.credentials
+        block.signature = pkcs1_15.new(signerPrivateKey).sign(hashObj)
+        # send it to user 
+        serializedBlockList = [pickle.dumps(block)]
+        server_connect(self.ids.ip.text, self.ids.port.text, serializedBlockList)
+        
+
+
+class RecieveBlock(Screen):
+    pass
+
+class LoadPopupDesign(BoxLayout):
     pass
 
 class nodeApp(App):

@@ -42,6 +42,10 @@ class BlockChain():
         self.current_block_hash = block.block_hash
         self.chain.append(block)
 
+    def appendSignedBlock(block):
+        self.current_block_hash = block.block_hash
+        self.chain.append(block)
+
     def verifyBlock(self, block, signerPublicKey):
         hashObj, blockHash = self.hashBlock(block)
         try:
