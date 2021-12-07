@@ -23,6 +23,7 @@ def accept():
     connected(client_socket)
 
 def connected(client):
+    global List, listLength
     try:
         length=client.recv(HEADER_SIZE).decode('UTF-8')
         message=client.recv(int(length)).decode('UTF-8')
@@ -34,7 +35,10 @@ def connected(client):
             message=client.recv(int(length)).decode('UTF-8')
             print(message)
             List.append(client.recv(int(message[6:])))
-            print(List)
+        for x in List:
+            print(x)
+            print("-------------------------")
+
     except Exception as e:
         print("exception in connected: "+str(e)) 
         client.close()
@@ -51,6 +55,16 @@ def getListLength():
 def getList():
     global List
     return List
+
+"""
+    1) startListening -- listens for the client
+    2) make a while loop and just iterate it until ListLength is not None
+    3) make a while len(getList())!=getListLength():
+            edit the shared variable of the progress bar
+    4) clearList()
+  
+"""
+
 
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 def startListening(port):
