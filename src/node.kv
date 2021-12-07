@@ -57,7 +57,7 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode\n[size=20]UserNode"
+            text: "DiagNode\n[size=20]UserNode"
             color: app.theme["font1"]
             markup: True
             font_size: sp(45)
@@ -95,13 +95,11 @@ Screen_Manager:
                 TextInput:
                     id: username
                     hint_text: 'Username'
-                    text: "arjun"
                     height: dp(50)
                 TextInput:
                     id: password 
                     hint_text: 'Password'
                     password: True
-                    text: "arjun2000"
                     height: dp(50)
                 BoxLayout:
                     size_hint_y: None
@@ -143,7 +141,7 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode\n[size=20]UserNode"
+            text: "DiagNode\n[size=20]UserNode"
             color: app.theme["font1"]
             markup: True
             font_size: sp(45)
@@ -239,7 +237,7 @@ Screen_Manager:
             height: self.minimum_height
             Label:
                 font_name: app.fonts["main"]
-                text: "HealthNode\n[size=20]SuperNode"
+                text: "DiagNode\n[size=20]UserNode"
                 color: app.theme["font1"]
                 font_size: sp(45)
                 markup: True
@@ -344,7 +342,7 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode\n[size=20]SuperNode"
+            text: "DiagNode\n[size=20]UserNode"
             color: app.theme["font1"]
             font_size: sp(45)
             markup: True
@@ -388,6 +386,7 @@ Screen_Manager:
                     
                 TextInput:
                     id: port
+                    text: "8000"
                     hint_text: 'Port'
                     password: True
                     height: dp(50)
@@ -406,7 +405,12 @@ Screen_Manager:
                         text: "Get"
                         background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
                         height: dp(50)
-                        on_release: root.signup_and_verify()
+                        on_release: root.recieve()
+                Button:
+                    text: "Show Block Chain in CLI :)"
+                    background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                    height: dp(50)
+                    on_release: root.showBlockChain()
                 Widget:
                     size_hint_y: None
                     height: dp(10)
@@ -420,6 +424,7 @@ Screen_Manager:
 <LoadPopupDesign>:
     orientation: "vertical"
     Label:
-        text: "Hello"
+        text: "LOADING..."
         size_hint_y: None
         height: dp(300)
+        font_size: sp(22)

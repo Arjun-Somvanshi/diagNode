@@ -56,7 +56,7 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode\n[size=20]SuperNode"
+            text: "DiagNode\n[size=20]SuperNode"
             color: app.theme["font1"]
             font_size: sp(45)
             markup: True
@@ -94,12 +94,10 @@ Screen_Manager:
                 TextInput:
                     id: username
                     hint_text: 'Username'
-                    text: "arjun"
                     height: dp(50)
                 TextInput:
                     id: password 
                     hint_text: 'Password'
-                    text: "arjun2000"
                     height: dp(50)
                     password: True
                     height: dp(50)
@@ -141,7 +139,7 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode\n[size=20]SuperNode"
+            text: "DiagNode\n[size=20]SuperNode"
             color: app.theme["font1"]
             font_size: sp(45)
             markup: True
@@ -235,7 +233,7 @@ Screen_Manager:
             height: self.minimum_height
             Label:
                 font_name: app.fonts["main"]
-                text: "HealthNode\n[size=20]SuperNode"
+                text: "DiagNode\n[size=20]SuperNode"
                 color: app.theme["font1"]
                 font_size: sp(45)
                 markup: True
@@ -291,15 +289,18 @@ Screen_Manager:
                 TextInput:
                     id: ip 
                     hint_text: 'IP Address'
+                    text: "127.0.0.1"
                     height: dp(50)
                 TextInput:
                     id: port
                     hint_text: 'Port'
+                    text: "8000" 
                     password: True
                     height: dp(50)
                 TextInput:
                     id: medical_record_path
                     hint_text: 'Medical Record File'
+                    text: "medical_record.json"
                     password: True
                     height: dp(50)
                 BoxLayout:
@@ -342,7 +343,7 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode\n[size=20]SuperNode"
+            text: "DiagNode\n[size=20]SuperNode"
             color: app.theme["font1"]
             font_size: sp(45)
             markup: True

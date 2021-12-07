@@ -15,6 +15,15 @@ class Block():
         self.block_hash = None
         self.signature = None
         self.signer_hash = None # This is the super nodes identity
+    
+    def hashBlock(self, block):
+        blockCopy = Block()
+        blockCopy.date = block.date
+        blockCopy.signer_hash = block.signer_hash
+        blockCopy.medical_data = block.medical_data
+        blockAsBytes = pickle.dumps(blockCopy)
+        blockHash = SHA256.new(blockAsBytes)
+        return blockHash, blockHash.hexdigest()
 
     def get_time(self): 
         from datetime import datetime
@@ -48,17 +57,19 @@ class BlockChain():
 
     def verifyBlock(self, block, signerPublicKey):
         hashObj, blockHash = self.hashBlock(block)
+        print(blockHash)
         try:
             pkcs1_15.new(signerPublicKey).verify(hashObj, block.signature)
             print("Block Verified.")
+            return True
         except:
             print("Verification Failed")
+            return False
     
     def hashBlock(self, block):
         blockCopy = Block()
         blockCopy.date = block.date
-        blockCopy.user_hash = block.user_hash
-        blockCopy.signer_hash = block.user_hash
+        blockCopy.signer_hash = block.signer_hash
         blockCopy.medical_data = block.medical_data
         blockAsBytes = pickle.dumps(blockCopy)
         blockHash = SHA256.new(blockAsBytes)

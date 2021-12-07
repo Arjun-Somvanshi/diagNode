@@ -67,7 +67,7 @@ def getList():
 
 
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-def startListening(port):
+def startListening(port, *args):
     global server_socket
     Host=""
     server_socket.bind((Host,port))

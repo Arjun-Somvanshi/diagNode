@@ -12,6 +12,8 @@ from Crypto.Signature import pkcs1_15
 from Crypto.PublicKey import RSA
 from blockchain import Block
 from security import *
+import pickle
+from client import server_connect
 import os
 
 app = None
@@ -79,17 +81,6 @@ class LoadPopupDesign(BoxLayout):
 class SendBlock(Screen):
     def send(self):
         global app
-        design = LoadPopupDesign()
-        loadPopup = CustomModalView(
-                                size_hint = (0.7, 0.8),
-                                size_hint_max = (dp(450),dp(550)),
-                                size_hint_min = (dp(325),dp(400)),
-                                custom_color = app.theme["primary"],
-                                opacity = 0,
-                                pos_hint = {'center_x': -2, 'center_y':0.5 }
-                           )
-        loadPopup.add_widget(design)
-        loadPopup.open(loadPopup.pos_hint, {'center_x': 0.5, 'center_y': 0.5}, "out_expo")
         # read medical record
         fileName = self.ids.medical_record_path.text
         medical_record = app.read_json_file(fileName) 
@@ -98,10 +89,12 @@ class SendBlock(Screen):
         block = Block()
         block.medical_data = medical_record
         block.signer_hash = app.credentials
-        block.signature = pkcs1_15.new(signerPrivateKey).sign(hashObj)
+        hashObj, block.block_hash = block.hashBlock(block)
+        print(block.block_hash)
+        block.signature = pkcs1_15.new(private_key).sign(hashObj)
         # send it to user 
         serializedBlockList = [pickle.dumps(block)]
-        server_connect(self.ids.ip.text, self.ids.port.text, serializedBlockList)
+        server_connect(self.ids.ip.text, int(self.ids.port.text), serializedBlockList)
         
 
 
