@@ -1,8 +1,11 @@
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
+from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ListProperty, StringProperty, DictProperty, BooleanProperty, NumericProperty
 from kivy.utils import rgba as RGBA
 from kivy.core.window import Window
+from kivy.metrics import dp, sp
+from CustomModalView import CustomModalView
 from security import *
 import os
 
@@ -11,6 +14,7 @@ Window.clearcolor = RGBA('#292B2F')
 
 class Screen_Manager(ScreenManager):
     pass
+
 class SignUp(Screen):
     def signup_and_verify(self):
         if self.ids.password.text == self.ids.cpassword.text:
@@ -22,7 +26,7 @@ class SignUp(Screen):
                     password_hash = blake(self.ids.password.text)                
                     credentials = username_hash + password_hash
                     credentials = credentials.encode("utf-8")
-                    os.mkdir("../UserData/")
+                    os.mkdir("../SuperUserData/")
                     app.write_file("Credentials.bin", credentials)
                     self.manager.transition = SlideTransition(direction="right")
                     self.manager.current = "login"
@@ -42,7 +46,8 @@ class Login(Screen):
         try:
             stored_hash = app.read_file("Credentials.bin").decode("utf-8")
             if stored_hash == credentials:
-                self.ids.message.text = "Success"
+                self.manager.transition = SlideTransition(direction="left")
+                self.manager.current = "sendblock"
             else:
                 self.ids.message.text = "Login Failed"
         except:
@@ -55,16 +60,38 @@ class Login(Screen):
         else:
             self.manager.transition = SlideTransition(direction="left")
             self.manager.current = "signup"
-class ViewRecords(Screen):
+
+class LoadPopupDesign(BoxLayout):
     pass
 
-class nodeApp(App):
+class SendBlock(Screen):
+    def send(self):
+        global app
+        design = LoadPopupDesign()
+        loadPopup = CustomModalView(
+                                size_hint = (0.7, 0.8),
+                                auto_dismiss = False,
+                                size_hint_max = (dp(450),dp(550)),
+                                size_hint_min = (dp(325),dp(400)),
+                                custom_color = app.theme["primary"],
+                                opacity = 0,
+                                pos_hint = {'center_x': -2, 'center_y':0.5 }
+                           )
+        loadPopup.add_widget(design)
+        loadPopup.open(loadPopup.pos_hint, {'center_x': 0.5, 'center_y': 0.5}, "out_expo")
+        
+
+
+class RecieveBlocks(Screen):
+    pass
+
+class superNodeApp(App):
     fonts = DictProperty({"main": "Fonts/Montserrat-SemiBold.ttf", "regular": "Fonts/Montserrat-Regular.ttf"})
     theme = DictProperty({"primary_dark": RGBA("#292B2F"), "primary": RGBA("#2F3136"), 
                           "secondary_dark": RGBA("#36393F"), "secondary": RGBA("#40444B"),
                           "font1": RGBA("#697279"), "font2": RGBA("#ffffff")
                         })
-    home = StringProperty('../UserData/')
+    home = StringProperty('../SuperUserData/')
 
     def read_file(self, file):
         with open(self.home+file, 'rb') as f:
@@ -84,17 +111,17 @@ class nodeApp(App):
 
     def checkUser(self):
         try:
-            if os.path.isfile("../UserData/Credentials.bin"):
+            if os.path.isfile("../SuperUserData/Credentials.bin"):
                 return True
             return False
         except:
             return False
 
     def on_start(self):
-        Window.clearcolor = self.theme["primary_dark"]
+        Window.clearcolor = self.theme["primary"]
     def build(self):
         global app
         app = self
 
 if __name__ == "__main__":
-    healthNodeApp().run()
+    superNodeApp().run()

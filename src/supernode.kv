@@ -1,0 +1,424 @@
+#: import RGBA kivy.utils.rgba
+#: import Window kivy.core.window.Window
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+Screen_Manager:
+    Login:
+    SignUp:
+    SendBlock:
+    RecieveBlocks:
+<Label>:
+    font_name: app.fonts["regular"]
+    color: app.theme["font2"]
+    size_hint_y: None
+<Button>:
+    background_normal: ''
+    background_down: ''
+    background_color: app.theme["primary"] if self.state == "normal" else app.theme["primary_dark"]
+    color: app.theme["font1"]
+    font_name: app.fonts["regular"]
+    size_hint_y: None
+
+<TextInput>:
+    canvas.after:
+        Color:
+            rgba: (1,0,0,0.5) if self.error else (0,0,0,0)
+        Line:
+            points: [self.x, self.y, self.x, self.top, self.right, self.top, self.right, self.y, self.x, self.y]
+    error: False
+    background_color:  app.theme['secondary']
+    background_normal: ''
+    foreground_color: app.theme['font2']
+    multiline: False
+    padding: dp(10)
+    background_disabled_normal: ''
+    font_name: app.fonts["regular"] 
+    cursor_color: app.theme['font2']
+    hint_text_color: app.theme['font1']
+    size_hint_y: None
+    write_tab: False
+    disabled_foreground_color: self.foreground_color if self.text else self.hint_text_color
+    disabled_background_color: self.background_color if self.text else self.hint_text_color
+
+<Login>:
+    name: 'login'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary_dark"]
+            RoundedRectangle:
+                size: self.width - self.width/8, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(100)
+        Label:
+            font_name: app.fonts["main"]
+            text: "HealthNode\n[size=20]SuperNode"
+            color: app.theme["font1"]
+            font_size: sp(45)
+            markup: True
+            halign: 'right'
+            height: self.texture_size[1]
+        Label:
+            id: message
+            size_hint_y: None
+            height: dp(20)
+            color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary_dark"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "L O G I N"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                TextInput:
+                    id: username
+                    hint_text: 'Username'
+                    text: "arjun"
+                    height: dp(50)
+                TextInput:
+                    id: password 
+                    hint_text: 'Password'
+                    text: "arjun2000"
+                    height: dp(50)
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "SignUp"
+                        height: dp(50)
+                        on_release: root.signup()
+                    Button:
+                        text: "Login"
+                        height: dp(50)
+                        on_release: root.auth()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            height: dp(50)
+            color: app.theme['font1']
+
+<SignUp>:
+    name: 'signup'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary_dark"]
+            RoundedRectangle:
+                size: self.width, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(100)
+        Label:
+            font_name: app.fonts["main"]
+            text: "HealthNode\n[size=20]SuperNode"
+            color: app.theme["font1"]
+            font_size: sp(45)
+            markup: True
+            halign: 'right'
+            height: self.texture_size[1]
+        Label:
+            id: message
+            size_hint_y: None
+            height: dp(20)
+            color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary_dark"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "S I G N   U P"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                TextInput:
+                    id: username
+                    hint_text: 'Username'
+                    height: dp(50)
+                TextInput:
+                    id: password
+                    hint_text: 'Password'
+                    password: True
+                    height: dp(50)
+                TextInput:
+                    id: cpassword
+                    hint_text: 'Confirm Password'
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "Back"
+                        height: dp(50)
+                        on_release:
+                            app.root.transition = SlideTransition(direction='right')
+                            app.root.current = 'login'
+                    Button:
+                        text: "SignUp"
+                        height: dp(50)
+                        on_release: root.signup_and_verify()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            color: app.theme['font1']
+            height: dp(50)
+
+
+<SendBlock>:
+    name: 'sendblock'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary_dark"]
+            RoundedRectangle:
+                size: self.width, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(50)
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            Label:
+                font_name: app.fonts["main"]
+                text: "HealthNode\n[size=20]SuperNode"
+                color: app.theme["font1"]
+                font_size: sp(45)
+                markup: True
+                halign: 'right'
+                height: self.texture_size[1]
+            Widget:
+                size_hint_y: None
+                height: dp(20)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Widget:
+                Button:
+                    text: "Recieve Blocks"
+                    background_color: app.theme["primary_dark"] if self.state == "normal" else app.theme["primary"]
+                    size_hint_y: None
+                    height: dp(40)
+                    on_release:
+                        app.root.transition = SlideTransition(direction='left')
+                        app.root.current = 'recieveblocks'
+            Widget:
+                size_hint_y: None
+                height: dp(40)
+            Label:
+                id: message
+                size_hint_y: None
+                height: dp(40)
+                color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary_dark"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "Add Block"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                TextInput:
+                    id: ip 
+                    hint_text: 'IP Address'
+                    height: dp(50)
+                TextInput:
+                    id: port
+                    hint_text: 'Port'
+                    password: True
+                    height: dp(50)
+                TextInput:
+                    id: medical_record_file
+                    hint_text: 'Medical Record File'
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "Back"
+                        height: dp(50)
+                        on_release:
+                            app.root.transition = SlideTransition(direction='right')
+                            app.root.current = 'login'
+                    Button:
+                        text: "Send"
+                        height: dp(50)
+                        on_release: root.send()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            color: app.theme['font1']
+            height: dp(50)
+
+<RecieveBlocks>: 
+    name: "recieveblocks"
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: app.theme["primary_dark"]
+            RoundedRectangle:
+                size: self.width, self.height/4
+                pos: self.width/8, self.height - self.height/8
+                radius: [self.height/8,0,0, self.height/8]
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)
+        spacing: dp(100)
+        Label:
+            font_name: app.fonts["main"]
+            text: "HealthNode\n[size=20]SuperNode"
+            color: app.theme["font1"]
+            font_size: sp(45)
+            markup: True
+            halign: 'right'
+            height: self.texture_size[1]
+        Label:
+            id: message
+            size_hint_y: None
+            height: dp(20)
+            color: app.theme['font1']
+        BoxLayout:
+            orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
+            Widget:
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: app.theme["primary_dark"]
+                    RoundedRectangle:
+                        size: self.size 
+                        pos: self.pos 
+                        radius: [self.height/8]
+                cols: 1
+                size_hint_y: None
+                spacing: dp(15)
+                padding: dp(15)
+                height: self.minimum_height
+                Label:
+                    text: "Verify Blocks"
+                    color: app.theme["font1"]
+                    font_size: sp(35)
+                    halign: 'right'
+                    height: self.texture_size[1]
+                Label:
+                    id: ip
+                    text: "IP Address"
+                    color: app.theme["font1"]
+                    height: dp(50)
+                TextInput:
+                    id: port
+                    hint_text: 'Port'
+                    password: True
+                    height: dp(50)
+                TextInput:
+                    id: medical_record_file
+                    hint_text: 'Medical Record File'
+                    password: True
+                    height: dp(50)
+                BoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(50)
+                    Button:
+                        text: "Back"
+                        height: dp(50)
+                        on_release:
+                            app.root.transition = SlideTransition(direction='right')
+                            app.root.current = 'sendblock'
+                    Button:
+                        text: "Recieve"
+                        height: dp(50)
+                        on_release: root.signup_and_verify()
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+        Widget:
+        Label:
+            text: "Developed by Arjun Somvanshi & Raahil Armaan 2021"
+            size_hint_y: None
+            color: app.theme['font1']
+            height: dp(50)
+
+<LoadPopupDesign>:
+    orientation: "vertical"
+    Label:
+        text: "Hello"
+        size_hint_y: None
+        height: dp(300)

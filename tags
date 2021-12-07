@@ -1,0 +1,105 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/zephyrus/python_projects/healthNode/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+AES_Decrypt	src/security.py	/^def AES_Decrypt(key, encrypted_data): # enrypted_data is a dictionary which contains the encrypt/;"	f
+AES_Encrypt	src/security.py	/^def AES_Encrypt(key, data): # The data should be in bytes here$/;"	f
+Block	src/blockchain.py	/^class Block():$/;"	c
+BlockChain	src/blockchain.py	/^class BlockChain():$/;"	c
+ECB_decrypt	src/security.py	/^def ECB_decrypt(cipher_text, key):$/;"	f
+ECB_encrypt	src/security.py	/^def ECB_encrypt(plaintext, key):$/;"	f
+Login	src/main.py	/^class Login(Screen):$/;"	c
+Login	src/node.py	/^class Login(Screen):$/;"	c
+Login	src/superNode.py	/^class Login(Screen):$/;"	c
+RGBA	src/main.py	/^from kivy.utils import rgba as RGBA$/;"	x	nameref:unknown:rgba
+RGBA	src/node.py	/^from kivy.utils import rgba as RGBA$/;"	x	nameref:unknown:rgba
+RGBA	src/superNode.py	/^from kivy.utils import rgba as RGBA$/;"	x	nameref:unknown:rgba
+Screen_Manager	src/main.py	/^class Screen_Manager(ScreenManager):$/;"	c
+Screen_Manager	src/node.py	/^class Screen_Manager(ScreenManager):$/;"	c
+Screen_Manager	src/superNode.py	/^class Screen_Manager(ScreenManager):$/;"	c
+SignUp	src/main.py	/^class SignUp(Screen):$/;"	c
+SignUp	src/node.py	/^class SignUp(Screen):$/;"	c
+SignUp	src/superNode.py	/^class SignUp(Screen):$/;"	c
+ViewRecords	src/main.py	/^class ViewRecords(Screen):$/;"	c
+ViewRecords	src/node.py	/^class ViewRecords(Screen):$/;"	c
+ViewRecords	src/superNode.py	/^class ViewRecords(Screen):$/;"	c
+__init__	src/blockchain.py	/^    def __init__(self):$/;"	m	class:Block
+__init__	src/blockchain.py	/^    def __init__(self, userHash):$/;"	m	class:BlockChain
+app	src/main.py	/^app = None$/;"	v
+app	src/node.py	/^app = None$/;"	v
+app	src/superNode.py	/^app = None$/;"	v
+appendBlock	src/blockchain.py	/^    def appendBlock(self, medicalData, userHash, signerPrivateKey, signer_hash):$/;"	m	class:BlockChain
+auth	src/main.py	/^    def auth(self):$/;"	m	class:Login
+auth	src/node.py	/^    def auth(self):$/;"	m	class:Login
+auth	src/superNode.py	/^    def auth(self):$/;"	m	class:Login
+auth_hash	src/security.py	/^def auth_hash(master_key):$/;"	f
+blake	src/security.py	/^def blake (data): # send strings or bytes$/;"	f
+blockChain	src/blockchain.py	/^            blockChain = pickle.load(f) $/;"	v
+blockChain	src/blockchain.py	/^        blockChain = BlockChain(credentials)$/;"	v
+build	src/main.py	/^    def build(self):$/;"	m	class:nodeApp
+build	src/node.py	/^    def build(self):$/;"	m	class:healthNodeApp
+build	src/superNode.py	/^    def build(self):$/;"	m	class:healthNodeApp
+checkUser	src/main.py	/^    def checkUser(self):$/;"	m	class:nodeApp
+checkUser	src/node.py	/^    def checkUser(self):$/;"	m	class:healthNodeApp
+checkUser	src/superNode.py	/^    def checkUser(self):$/;"	m	class:healthNodeApp
+composite_key_test	src/security.py	/^def composite_key_test(first):$/;"	f
+credentials	src/blockchain.py	/^    credentials = username_hash + password_hash$/;"	v
+credentialsHospital	src/blockchain.py	/^    credentialsHospital = hospital_admin_username + hospital_admin_password $/;"	v
+fonts	src/main.py	/^    fonts = DictProperty({"main": "Fonts\/Montserrat-SemiBold.ttf", "regular": "Fonts\/Montserra/;"	v	class:nodeApp
+fonts	src/node.py	/^    fonts = DictProperty({"main": "Fonts\/Montserrat-SemiBold.ttf", "regular": "Fonts\/Montserra/;"	v	class:healthNodeApp
+fonts	src/superNode.py	/^    fonts = DictProperty({"main": "Fonts\/Montserrat-SemiBold.ttf", "regular": "Fonts\/Montserra/;"	v	class:healthNodeApp
+get_time	src/blockchain.py	/^    def get_time(self): $/;"	m	class:Block
+hashBlock	src/blockchain.py	/^    def hashBlock(self, block):$/;"	m	class:BlockChain
+healthNodeApp	src/node.py	/^class healthNodeApp(App):$/;"	c
+healthNodeApp	src/superNode.py	/^class healthNodeApp(App):$/;"	c
+home	src/main.py	/^    home = StringProperty('..\/UserData\/')$/;"	v	class:nodeApp
+home	src/node.py	/^    home = StringProperty('..\/UserData\/')$/;"	v	class:healthNodeApp
+home	src/superNode.py	/^    home = StringProperty('..\/UserData\/')$/;"	v	class:healthNodeApp
+hospital_admin_password	src/blockchain.py	/^    hospital_admin_password = blake("raahil2022")$/;"	v
+hospital_admin_username	src/blockchain.py	/^    hospital_admin_username = blake("Raahil")$/;"	v
+keyfile_decrypt	src/security.py	/^def keyfile_decrypt(key1, keyfile_dir):$/;"	f
+keyfile_encryption	src/security.py	/^def keyfile_encryption(key1):$/;"	f
+master_key	src/security.py	/^def master_key(key1, first = False, re_encrypting = False, key2 = None): $/;"	f
+master_key_store	src/security.py	/^def master_key_store(master_key): # This stores the master key's hash value$/;"	f
+medical_data	src/blockchain.py	/^        medical_data = {"sick": "sick of hippie black metal that sounds like djent is having a b/;"	v
+medical_data	src/blockchain.py	/^        medical_data = {"sick": "stomach ache bro"}$/;"	v
+medical_data	src/blockchain.py	/^        medical_data = {"sick": "yes I have headache"}$/;"	v
+nodeApp	src/main.py	/^class nodeApp(App):$/;"	c
+on_start	src/main.py	/^    def on_start(self):$/;"	m	class:nodeApp
+on_start	src/node.py	/^    def on_start(self):$/;"	m	class:healthNodeApp
+on_start	src/superNode.py	/^    def on_start(self):$/;"	m	class:healthNodeApp
+password_hash	src/blockchain.py	/^    password_hash = blake("arjun1922")                $/;"	v
+read_file	src/main.py	/^    def read_file(self, file):$/;"	m	class:nodeApp
+read_file	src/node.py	/^    def read_file(self, file):$/;"	m	class:healthNodeApp
+read_file	src/superNode.py	/^    def read_file(self, file):$/;"	m	class:healthNodeApp
+read_json_file	src/main.py	/^    def read_json_file(self, file, content):$/;"	m	class:nodeApp
+read_json_file	src/node.py	/^    def read_json_file(self, file, content):$/;"	m	class:healthNodeApp
+read_json_file	src/superNode.py	/^    def read_json_file(self, file, content):$/;"	m	class:healthNodeApp
+showBlockChainCli	src/blockchain.py	/^    def showBlockChainCli(self):$/;"	m	class:BlockChain
+signer_private_key	src/blockchain.py	/^    signer_private_key = RSA.generate(2048)$/;"	v
+signer_public_key	src/blockchain.py	/^    signer_public_key = signer_private_key.publickey()$/;"	v
+signup	src/main.py	/^    def signup(self):$/;"	m	class:Login
+signup	src/node.py	/^    def signup(self):$/;"	m	class:Login
+signup	src/superNode.py	/^    def signup(self):$/;"	m	class:Login
+signup_and_verify	src/main.py	/^    def signup_and_verify(self):$/;"	m	class:SignUp
+signup_and_verify	src/node.py	/^    def signup_and_verify(self):$/;"	m	class:SignUp
+signup_and_verify	src/superNode.py	/^    def signup_and_verify(self):$/;"	m	class:SignUp
+test_encryption	src/security.py	/^def test_encryption(): # to test the encryption$/;"	f
+theme	src/main.py	/^    theme = DictProperty({"primary_dark": RGBA("#292B2F"), "primary": RGBA("#2F3136"), $/;"	v	class:nodeApp
+theme	src/node.py	/^    theme = DictProperty({"primary_dark": RGBA("#292B2F"), "primary": RGBA("#2F3136"), $/;"	v	class:healthNodeApp
+theme	src/superNode.py	/^    theme = DictProperty({"primary_dark": RGBA("#292B2F"), "primary": RGBA("#2F3136"), $/;"	v	class:healthNodeApp
+username_hash	src/blockchain.py	/^    username_hash = blake("Arjun")                $/;"	v
+verifyBlock	src/blockchain.py	/^    def verifyBlock(self, block, signerPublicKey):$/;"	m	class:BlockChain
+write_file	src/main.py	/^    def write_file(self, file, content):$/;"	m	class:nodeApp
+write_file	src/node.py	/^    def write_file(self, file, content):$/;"	m	class:healthNodeApp
+write_file	src/superNode.py	/^    def write_file(self, file, content):$/;"	m	class:healthNodeApp
+write_json_file	src/main.py	/^    def write_json_file(self, file, content):$/;"	m	class:nodeApp
+write_json_file	src/node.py	/^    def write_json_file(self, file, content):$/;"	m	class:healthNodeApp
+write_json_file	src/superNode.py	/^    def write_json_file(self, file, content):$/;"	m	class:healthNodeApp

@@ -55,18 +55,21 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode"
+            text: "HealthNode\n[size=20]UserNode"
             color: app.theme["font1"]
+            markup: True
             font_size: sp(45)
             halign: 'right'
             height: self.texture_size[1]
         Label:
             id: message
             size_hint_y: None
-            height: dp(100)
+            height: dp(20)
             color: app.theme['font1']
         BoxLayout:
             orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
             Widget:
             GridLayout:
                 canvas.before:
@@ -136,18 +139,21 @@ Screen_Manager:
         spacing: dp(100)
         Label:
             font_name: app.fonts["main"]
-            text: "HealthNode"
+            text: "HealthNode\n[size=20]UserNode"
             color: app.theme["font1"]
+            markup: True
             font_size: sp(45)
             halign: 'right'
             height: self.texture_size[1]
         Label:
             id: message
             size_hint_y: None
-            height: dp(100)
+            height: dp(20)
             color: app.theme['font1']
         BoxLayout:
             orientation: 'vertical'           
+            size_hint_y: None
+            height: self.minimum_height
             Widget:
             GridLayout:
                 canvas.before:
@@ -171,19 +177,16 @@ Screen_Manager:
                 TextInput:
                     id: username
                     hint_text: 'Username'
-                    text: "arjun"
                     height: dp(50)
                 TextInput:
                     id: password
                     hint_text: 'Password'
-                    text: "arjun2000"
                     password: True
                     height: dp(50)
                 TextInput:
                     id: cpassword
                     hint_text: 'Confirm Password'
                     password: True
-                    text: "arjun2000"
                     height: dp(50)
                 BoxLayout:
                     size_hint_y: None

@@ -97,4 +97,4 @@ class nodeApp(App):
         app = self
 
 if __name__ == "__main__":
-    healthNodeApp().run()
+    nodeApp().run()
